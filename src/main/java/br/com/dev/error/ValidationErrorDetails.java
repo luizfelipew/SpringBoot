@@ -1,14 +1,12 @@
 package br.com.dev.error;
 
 /**
- * Created by FelipeWendt on 16/09/17.
+ * Created by FelipeWendt on 25/09/17.
  */
-public class ResourceNotFoundDetails extends ErrorDetail{
+public class ValidationErrorDetails extends ErrorDetail {
 
-    private ResourceNotFoundDetails() {
-
-    }
-
+    private String field;
+    private String fieldMessage;
 
     public static final class Builder {
         private String title;
@@ -58,5 +56,13 @@ public class ResourceNotFoundDetails extends ErrorDetail{
             resourceNotFoundDetails.setStatus(status);
             return resourceNotFoundDetails;
         }
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public String getFieldMessage() {
+        return fieldMessage;
     }
 }
