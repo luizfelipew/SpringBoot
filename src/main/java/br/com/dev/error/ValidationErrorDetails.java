@@ -14,6 +14,8 @@ public class ValidationErrorDetails extends ErrorDetail {
         private String detail;
         private long timestamp;
         private String developerMessage;
+        private String field;
+        private String fieldMessage;
 
         private Builder() {
         }
@@ -47,14 +49,27 @@ public class ValidationErrorDetails extends ErrorDetail {
             return this;
         }
 
-        public ResourceNotFoundDetails build() {
-            ResourceNotFoundDetails resourceNotFoundDetails = new ResourceNotFoundDetails();
-            resourceNotFoundDetails.setDeveloperMessage(developerMessage);
-            resourceNotFoundDetails.setTitle(title);
-            resourceNotFoundDetails.setDetail(detail);
-            resourceNotFoundDetails.setTimestamp(timestamp);
-            resourceNotFoundDetails.setStatus(status);
-            return resourceNotFoundDetails;
+        public Builder field(String field) {
+            this.field = field;
+            return this;
+        }
+
+        public Builder fieldMessage(String fieldMessage) {
+            this.fieldMessage = fieldMessage;
+            return this;
+        }
+
+        public ValidationErrorDetails build() {
+            ValidationErrorDetails validationErrorDetails = new ValidationErrorDetails();
+            validationErrorDetails.setDeveloperMessage(developerMessage);
+            validationErrorDetails.setTitle(title);
+            validationErrorDetails.setDetail(detail);
+            validationErrorDetails.setTimestamp(timestamp);
+            validationErrorDetails.setStatus(status);
+            validationErrorDetails.field = field;
+            validationErrorDetails.fieldMessage = fieldMessage;
+
+            return validationErrorDetails;
         }
     }
 
