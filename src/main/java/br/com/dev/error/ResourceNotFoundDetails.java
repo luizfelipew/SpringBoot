@@ -3,7 +3,7 @@ package br.com.dev.error;
 /**
  * Created by FelipeWendt on 16/09/17.
  */
-public class ResourceNotFoundDetails extends ErrorDetail{
+public class ResourceNotFoundDetails extends ErrorDetails {
 
     private ResourceNotFoundDetails() {
 
