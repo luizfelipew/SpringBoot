@@ -1,5 +1,6 @@
 package br.com.dev.model;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
@@ -9,10 +10,11 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Student extends AbstractEntity{
-    @NotEmpty
+    @NotEmpty(message = "O campo nome do estudante é obrigatório")
     private String name;
 
     @NotEmpty
+    @Email
     private String email;
 
     public String getEmail() {
