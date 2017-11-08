@@ -21,7 +21,7 @@ import javax.validation.Valid;
  * Created by FelipeWendt on 07/09/17.
  */
 @RestController
-@RequestMapping("students")
+@RequestMapping("v1")
 public class StudentEndpoint {
     //private final DateUtil dateUtil;
 
@@ -33,7 +33,7 @@ public class StudentEndpoint {
     }
 
     //@RequestMapping(method = RequestMethod.GET)
-    @GetMapping
+    @GetMapping(path = "protected/students")
     public ResponseEntity<?> listAll(Pageable pageable) {
        // System.out.println("------------  " + dateUtil.formatLocalDateTimeToDataBaseStyle(LocalDateTime.now()));
         return new ResponseEntity<>(studentDAO.findAll(pageable), HttpStatus.OK);
@@ -41,7 +41,7 @@ public class StudentEndpoint {
     }
 
     //@RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "protected/students/{id}")
     public ResponseEntity<?> getStudentsbyId(@PathVariable("id") Long id,
                                              @AuthenticationPrincipal UserDetails userDetails) {
         //pegar o usuario na requisicao pelo spring
@@ -52,13 +52,13 @@ public class StudentEndpoint {
 
     }
 
-    @GetMapping(path = "/findByName/{name}")
+    @GetMapping(path = "protected/students/findByName/{name}")
     public ResponseEntity<?> findStudentsByName(@PathVariable String name){
         return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
     }
 
     //@RequestMapping(method = RequestMethod.POST)
-    @PostMapping
+    @PostMapping(path = "admin/students")
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> save(@Valid @RequestBody Student student) {
 
@@ -67,7 +67,7 @@ public class StudentEndpoint {
 
 
     //@RequestMapping(method = RequestMethod.DELETE)
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "admin/students/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         verifyStudentExists(id);
@@ -76,7 +76,7 @@ public class StudentEndpoint {
     }
 
     //@RequestMapping(method = RequestMethod.PUT)
-    @PutMapping
+    @PutMapping(path = "admin/students")
     public ResponseEntity<?> update(@RequestBody Student student) {
         verifyStudentExists(student.getId());
         studentDAO.save(student);
