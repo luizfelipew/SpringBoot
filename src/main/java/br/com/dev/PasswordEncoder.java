@@ -8,9 +8,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 =======
  * Created by FelipeWendt on 08/11/17.
 >>>>>>> terceira-autorizacao
+<<<<<<< HEAD
 =======
  * Created by FelipeWendt on 08/11/17.
 >>>>>>> autorizacao-terceira-parte
+=======
+>>>>>>> develop
  */
 public class PasswordEncoder {
     public static void main(String[] args) {
@@ -19,9 +22,15 @@ public class PasswordEncoder {
     }
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> develop
 <<<<<<< develop
 
 =======
 >>>>>>> terceira-autorizacao
+<<<<<<< HEAD
 =======
 >>>>>>> autorizacao-terceira-parte
+=======
+>>>>>>> develop
