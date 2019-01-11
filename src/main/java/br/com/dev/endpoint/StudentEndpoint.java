@@ -32,20 +32,15 @@ public class StudentEndpoint {
         this.studentDAO = studentDAO;
     }
 
-    //@RequestMapping(method = RequestMethod.GET)
     @GetMapping(path = "protected/students")
     public ResponseEntity<?> listAll(Pageable pageable) {
-       // System.out.println("------------  " + dateUtil.formatLocalDateTimeToDataBaseStyle(LocalDateTime.now()));
-        return new ResponseEntity<>(studentDAO.findAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(studentDAO.findAll(), HttpStatus.OK);
 
     }
 
-    //@RequestMapping(method = RequestMethod.GET, path = "/{id}")
     @GetMapping(path = "protected/students/{id}")
     public ResponseEntity<?> getStudentsbyId(@PathVariable("id") Long id,
                                              @AuthenticationPrincipal UserDetails userDetails) {
-        //pegar o usuario na requisicao pelo spring
-        //System.out.println(userDetails);
         verifyStudentExists(id);
         Student student = studentDAO.findOne(id);
         return new ResponseEntity<>(student, HttpStatus.OK);
@@ -57,7 +52,6 @@ public class StudentEndpoint {
         return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
     }
 
-    //@RequestMapping(method = RequestMethod.POST)
     @PostMapping(path = "admin/students")
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> save(@Valid @RequestBody Student student) {
@@ -66,7 +60,6 @@ public class StudentEndpoint {
     }
 
 
-    //@RequestMapping(method = RequestMethod.DELETE)
     @DeleteMapping(path = "admin/students/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id) {
@@ -75,7 +68,6 @@ public class StudentEndpoint {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //@RequestMapping(method = RequestMethod.PUT)
     @PutMapping(path = "admin/students")
     public ResponseEntity<?> update(@RequestBody Student student) {
         verifyStudentExists(student.getId());
