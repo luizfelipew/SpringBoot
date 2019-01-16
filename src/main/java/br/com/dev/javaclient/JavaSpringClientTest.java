@@ -1,5 +1,6 @@
 package br.com.dev.javaclient;
 
+import br.com.dev.model.PagebleResponse;
 import br.com.dev.model.Student;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
@@ -20,14 +21,19 @@ public class JavaSpringClientTest {
         ResponseEntity<Student> forEntity = restTemplate.getForEntity("/{id}", Student.class, 1);
         System.out.println(student);
         System.out.println(forEntity.getBody());
+//        Student[] students = restTemplate.getForObject("/", Student[].class);
+//        System.out.println(Arrays.asList(students));
+//        System.out.println(Arrays.toString(students));
+//
+//        ResponseEntity<List<Student>> exchange = restTemplate.exchange("/", HttpMethod.GET, null,
+//                new ParameterizedTypeReference<List<Student>>() {
+//        });
+//        System.out.println(exchange.getBody());
 
-        Student[] students = restTemplate.getForObject("/", Student[].class);
-        System.out.println(Arrays.asList(students));
-        System.out.println(Arrays.toString(students));
+        ResponseEntity<PagebleResponse<Student>> exchange = restTemplate.exchange("/?sort=id,desc&sort=name,asc", HttpMethod.GET, null,
+                new ParameterizedTypeReference<PagebleResponse<Student>>() {
+                });
 
-        ResponseEntity<List<Student>> exchange = restTemplate.exchange("/", HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<Student>>() {
-        });
-        System.out.println(exchange.getBody());
+        System.out.println(exchange);
     }
 }
