@@ -21,6 +21,12 @@ public class Student extends AbstractEntity{
         this.email = email;
     }
 
+    public Student(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
     @NotEmpty
     @Email(message = "Digite um email válido")
     private String email;
